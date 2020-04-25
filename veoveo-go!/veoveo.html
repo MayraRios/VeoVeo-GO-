@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Veo Veo Game</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-camo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--icon-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--w3 css-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--w3 css-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
+
+    .navbar {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+    }
+
+    .navbar-header a:hover {
+        color: #83ec19 !important;
+    }
+
+    .material-icons {
+        width: 20px;
+        height: 20px;
+    }
+
+    body {
+        font-family: 'Lato', sans-serif;
+        background: #e2dedb;
+        color: #b3aca7;
+    }
+
+    header {
+        position: relative;
+        margin: 100px 0 25px 0;
+        font-size: 2.3em;
+        text-align: center;
+        letter-spacing: 7px;
+    }
+
+    .container-fluid {
+        /*add padding*/
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+
+    #cp-text {
+        /*copyright*/
+        color: rgba(0, 0, 0, .7);
+        text-shadow: 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .bg-4 {
+        background-color: #2f2f2f;
+        color: #ffffff;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    body {
+        font-family: 'Lato', sans-serif;
+        background: #e2dedb;
+        color: #b3aca7;
+    }
+
+    .w3-myfont {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    /*for the word output*/
+    .center {
+        /*image centered*/
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    #imagecovid {
+        animation: mymove 5s infinite;
+        z-index: 3;
+        position: absolute;
+        margin-left: 20px;
+
+        animation-timing-function: ease-in-out;
+    }
+
+    #imagecovid2 {
+        animation: mymove 5s infinite;
+        z-index: 3;
+        position: absolute;
+        margin-left: 20px;
+
+        animation-timing-function: ease-in-out;
+    }
+
+    #pcovid {
+        z-index: 3;
+    }
+
+    #pcovid2 {
+        z-index: 3;
+    }
+
+    @keyframes mymove {
+        from {
+            left: 0px;
+        }
+
+        to {
+            left: 1600px;
+        }
+    }
+
+    /*keyframes*/
+    .germ {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        left: 15px;
+        top: 15px;
+        z-index: 2;
+        position: absolute;
+    }
+</style>
+
+<body>
+
+    <img id="imagecovid" src="images/coronavarius-rb.png" style="width:150px; height: 150px; display: none;">
+    <img id="imagecovid2" src="images/covid-19-b.png" style="width:150px; height: 150px; display: none;">
+
+
+
+    <nav class="navbar navbar-default">
+        <div class='container'>
+            <div class="navbar-header">
+                <a class="navbar-brand w3-xlarge" href="index.html"><i
+                        class="fa fa-home w3-padding-24 w3-padding-16">Home</i></a>
+            </div>
+        </div>
+        <!--container-->
+    </nav>
+    <div class="w3-center w3-padding-16">
+        <button class="w3-button w3-border" onclick="document.getElementById('id01').style.display='block'">
+            <h3 class="w3-text-color-dark-gray w3-tooltip">Instructions<span
+                    style="position:absolute;left:0;bottom:18px" class="w3-text w3-tag">Click!</span></h3>
+            <h6 class="w3-text-color-dark-gray w3-tooltip">version 1.0<span style="position:absolute;left:0;bottom:18px"
+                    class="w3-text w3-tag">Click!</span></h6>
+        </button>
+
+        <div id="id01" class="w3-panel w3-light-gray -16 w3-display-container" style="display:none">
+            <span onclick="this.parentElement.style.display='none'"
+                class="w3-button w3-red w3-display-topright">x</span>
+            <div class="w3-container w3-grey">
+                <h5>Get ready with a laptop and a movil:</h5>
+                <ol class="w3-ul">
+                    <li>1) Print markers here:<a href="print-markers.html"><b> Markers </b></a><br>
+                        Markers must be scattered in playing area</li>
+                    <li>2) Open laptop here:<a href="index.html"><b> Laptop Tab </b></a>
+                    </li>
+                    <li>3) Open movil here:<a href="ar-memory.html"><b> Movil Tab </b></a>
+                        Allow use of the camara.</li>
+                    <li>4)<b> Step 1:</b> Click on image.</li>
+                    <li>5)<b> Step2:</b> Letter given</li>
+                    <li>6) <b>Step 3:</b> Guess the word (3 chances)</li>
+                    <li>7) <b style="color: red;">This is the fun part!</b> Get ready to search the object in the
+                        room.<br> When ready press <b style="color: red;">START</b>. You have 20 seconds. Press <b
+                            style="color: red;">STOP</b> when you
+                        find
+                        the
+                        object.<br> The one who wins is the one who takes the least time to find the object!</li>
+                    <li> <b style="color:red">SHUFFLE:</b> This button adds level of complexity by <br> changing the
+                        values of the
+                        markers.<br> I's
+                        like shuffling the cards. </li>
+                </ol>
+            </div>
+            <!---w3-container-->
+        </div>
+        <!--id01-->
+    </div>
+    <!--w3-center-->
+    <!--w3-center-->
+    <p id="pcovid" class="w3-center w3-yellow w3-animate-bottom" style="display: none;">
+        <!--MESSAGE OUT-->
+        <font size="6">Stay at Home!</font>
+    </p>
+    <p id="pcovid2" class="w3-center w3-yellow w3-animate-bottom" style="display: none;">
+        <!--MESSAGE OUT-->
+        <font size="6">Wash your hands!</font>
+    </p>
+
+    <div class="w3-cell-row">
+
+        <div class="w3-container w3-light-gray  w3-cell w3-center  w3-animate-left">
+            <h3>Step 1: Click!</h3>
+            <div class="w3-panel w3-card-4">
+                <button onclick="giveMe()" class="w3-button"><img src="images/multishapes-rb.png"
+                        style="width: 300px;padding-top: 15px;padding-bottom: 15px;" alt="Objetos"></button>
+            </div>
+            <!--w3-card-->
+        </div>
+        <!--w3-container-->
+        <div class="w3-container w3-light-gray w3-cell  w3-animate-bottom">
+            <h3>Step 2:</h3>
+            <div class="w3-panel w3-light-gray w3-card-4">
+                <pre style="border: none;">
+                 I see I see, what do you see?...
+                 a little thing.
+                 With which letter?!
+                 with the letter...
+                 <br>
+                 The letter is...
+                 <p id="demo2" class="w3-center w3-myfont w3-jumbo"></p>
+                <p id="demo" class="w3-center w3-myfont  w3-xlarge" style="display: none;" ></p><!--full word hidden-->
+                 <p id="demo3" class="w3-center w3-myfont"></p>
+                 <p id="demo4" class="w3-center w3-myfont"></p>
+                </pre>
+            </div>
+            <!--w3-card-->
+        </div>
+        <!--w3-container-->
+
+        <div class="w3-container w3-light-gray w3-cell w3-animate-right">
+            <h3>Step 3: Guess!</h3>
+            <div class="w3-card-4">
+                <div class="w3-container w3-dark-grey">
+                    <h6 id="guessTittle">Guess #1</h6>
+                </div>
+                <div class="w3-container">
+                    <p><b>And your guess is?....</b></label></p>
+                    <input id="wordIn1" class="w3-input w3-border w3-sand" onfocus="this.value=''" type="text" value="">
+                    </p>
+                    <!--INPUT-->
+                    <p><button onclick="guessOne()" class="w3-btn w3-dark-grey">Send</button></p>
+                </div>
+                <p id="answer" class="w3-center w3-myfont"></p>
+                <p id="answer1" class="w3-center w3-myfont"></p>
+                <br>
+
+                <img id="imageOUT" class="center" src=" "
+                    style="width: 150px; height: 150px; padding-bottom: 15px; display: none;" alt="">
+
+            </div>
+            <!--w3-card-4-->
+        </div>
+    </div>
+    <!--w3-cell-row--->
+
+
+
+    <p id="demoB" style="display: none;"></p>
+
+
+
+    <footer class="container-fluid bg-4 w3-center">
+        <p>Phone: 787-375-3368</p>
+        <p>Email: mayra.rios5@gmail.com</p>
+        <p class="cp-text"><i class="fa fa-copyright"></i> Copyright 2020 DATA MEA LLC. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+        //////////////collapse function
+        function myFunction(id) {
+            var x = document.getElementById(id);
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }//myFunction collapse
+
+        ///////////First letter
+        var wordInDemo;//globals
+        var guess1Upper;
+        function giveMe() {
+            document.getElementById("pcovid2").style.display = "none";
+            document.getElementById("pcovid").style.display = "none";
+            document.getElementById("imagecovid").style.display = "none";
+            document.getElementById("imagecovid2").style.display = "none";
+
+            document.getElementById("imageOUT").style.display = "none";
+            document.getElementById("demo").style.display = "none";
+            document.getElementById("answer").innerHTML = " ";
+            document.getElementById("answer1").innerHTML = " ";
+            let letra = ["PLANE", "CONE", "CYLINDER", "BOX", "DODECAHEDRON", "TETRAHEDRON", "RING"];
+            let letraIndex = Math.floor(Math.random() * 7);  // returns a random integer from 0 to 6
+            let letraOutput = letra[letraIndex];//full word
+            document.getElementById("demo").innerHTML = letraOutput;//full word
+            // document.getElementById("demo").style.display = "none";//hide but keep value
+            let firstLetter = letraOutput.charAt(0);
+            document.getElementById("demo2").innerHTML = firstLetter;//First letter
+
+
+            let n = letraOutput.length;// letter lenght
+            let blankSpaces = "";
+            //gives a tip of how many letters are in the word
+            for (i = 0; i < n; i++) {
+                blankSpaces = blankSpaces + " __ ";
+                document.getElementById("demo3").innerHTML = blankSpaces;
+                document.getElementById("demo4").innerHTML = "(I have " + n + " letters)";
+            }//for
+        }//give me()
+
+        //////////guess #1
+        let counter = 1;
+
+        function guessOne() {
+
+            let guess1 = document.getElementById("wordIn1").value;//pass input1 value
+            let guess1Upper = guess1.toUpperCase();
+            document.getElementById("demoB").innerHTML = guess1Upper;
+            let wordInDemo = document.getElementById("demo").innerHTML;//pass letraOutput value
+            switch (wordInDemo) {
+                case "BOX":
+                    document.getElementById("imageOUT").src = "images/box-rb.png";
+                    break;
+
+                case "CYLINDER":
+                    document.getElementById("imageOUT").src = "images/cylinder-rb.png";
+                    document.getElementById("pcovid").src = "images/coronavarius-rb.png";
+                    document.getElementById("pcovid").style.display = "block";
+                    document.getElementById("imagecovid").style.display = "block";
+                    break;
+
+                case "CONE":
+                    document.getElementById("imageOUT").src = "images/cone-rb.png";
+                    break;
+
+                case "RING":
+                    document.getElementById("imageOUT").src = "images/ring-rb.png";
+                    document.getElementById("pcovid").src = "images/coronavarius-rb.png";
+                    document.getElementById("pcovid").style.display = "block";//message
+                    document.getElementById("imagecovid").style.display = "block"
+                    break;
+
+                case "TETRAHEDRON":
+                    document.getElementById("imageOUT").src = "images/tetrahedron-rb.png";
+                    break;
+
+                case "PLANE":
+                    document.getElementById("imageOUT").src = "images/3150646/plane.png";
+                    break;
+
+                case "DODECAHEDRON":
+                    document.getElementById("imageOUT").src = "images/dodecahedron-rb.png";
+                    document.getElementById("pcovid").src = "images/covid-19-b.png";
+                    document.getElementById("pcovid2").style.display = "block";//message
+                    document.getElementById("imagecovid2").style.display = "block";
+                    break;
+            }//switch
+
+            if (counter === 3 && wordInDemo === guess1Upper) {
+
+                document.getElementById("answer").innerHTML = "<i class='fa fa-check-circle' style = 'color:green; font-size:24px;'></i>" + " Correct!...THE END";
+                document.getElementById("answer1").innerHTML = '<i class="fa fa-mobile-phone" style="font-size:48px;"></i>' + "<span style='color:red;'> GO</span>" + "!...search " + wordInDemo;
+                document.getElementById("wordIn1").value = " ";
+                document.getElementById("guessTittle").innerHTML = "Guess #1";
+                document.getElementById("demo").style.display = "block";
+                document.getElementById("imageOUT").style.display = "block";
+                counter = 1;
+
+
+            } else if (counter === 3 && wordInDemo !== guess1Upper) {
+                document.getElementById("answer").innerHTML = '<i class="fa fa-close" style="font-size:24px;color:red"></i>' + " Incorrect!...THE END";
+                document.getElementById("answer1").innerHTML = '<i class="fa fa-mobile-phone" style="font-size:48px;"></i>' + "<span style='color:red;'> GO</span>" + "!...search " + wordInDemo;
+                document.getElementById("wordIn1").value = " ";
+                document.getElementById("guessTittle").innerHTML = "Guess #1";
+                document.getElementById("demo").style.display = "block";
+                counter = 1;
+
+
+
+
+
+            } else if (counter === 2 && wordInDemo === guess1Upper) {
+
+                document.getElementById("answer").innerHTML = "<i class='fa fa-check-circle' style = 'color:green; font-size:24px;'></i>" + " Correct!...THE END";
+                document.getElementById("answer1").innerHTML = '<i class="fa fa-mobile-phone" style="font-size:48px;"></i>' + "<span style='color:red;'> GO</span>" + "!...search " + wordInDemo;
+                document.getElementById("wordIn1").value = " ";
+                document.getElementById("guessTittle").innerHTML = "Guess #1";
+                document.getElementById("demo").style.display = "block";
+                document.getElementById("imageOUT").style.display = "block";
+                counter = 1;
+
+
+
+
+
+            } else if (counter === 2 && wordInDemo !== guess1Upper) {
+                document.getElementById("answer").innerHTML = '<i class="fa fa-close" style="font-size:24px;color:red"></i>' + " Incorrect!...go to " + "<span style = 'color:red;background-color:grey;'>Guess #3</span>";
+                document.getElementById("wordIn1").value = " ";
+                document.getElementById("guessTittle").innerHTML = "<span style = 'color:red;'>Guess #3</span>";
+                counter = counter + 1;
+
+
+
+            } else if (counter === 1 && wordInDemo === guess1Upper) {
+
+                document.getElementById("answer").innerHTML = "<i class='fa fa-check-circle' style = 'color:green; font-size:24px;'></i>" + " Correct!...THE END";
+                document.getElementById("answer1").innerHTML = '<i class="fa fa-mobile-phone" style="font-size:48px;"></i>' + "<span style='color:red;'> GO</span>" + "!...search " + wordInDemo;
+                document.getElementById("wordIn1").value = " ";
+                document.getElementById("demo").style.display = "block";
+                document.getElementById("imageOUT").style.display = "block";
+                counter = 1;
+
+            } else if (counter === 1 && wordInDemo !== guess1Upper) {
+                document.getElementById("answer").innerHTML = '<i class="fa fa-close" style="font-size:24px;color:red"></i>' + " Incorrect!...go to " + "<span style = 'color:yellow;background-color:grey;'>Guess #2</span>";
+                document.getElementById("wordIn1").value = " ";
+                document.getElementById("guessTittle").innerHTML = "<span style = 'color:yellow;'>Guess #2</span>";
+                counter = counter + 1;
+
+            }
+
+        }//function guessOne
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,531 @@
+<!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--w3 css-->
+    <!--w3 animation-->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <!--aframe-->
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    <!--jerome etienne markers-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Barrio' rel='stylesheet'>
+
+    <style>
+        .timer {
+
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            z-index: 2;
+            color: black;
+        }
+
+
+        /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+        @media screen and (min-width: 601px) {
+            div.timer {
+                font-size: 30px;
+            }
+        }
+
+        /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+        @media screen and (max-width: 600px) {
+            div.timer {
+                font-size: 30px;
+            }
+        }
+
+        .germ {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            left: 15px;
+            top: 15px;
+            z-index: 2;
+            position: absolute;
+        }
+
+        /*imagenes*/
+        .badguy {
+            padding: 3px;
+            width: 125px;
+            height: 125px;
+            left: 15px;
+            position: relative;
+            z-index: 5;
+
+
+        }
+
+        img {
+            animation: mymove 9s infinite;
+
+        }
+
+        #guy1 {
+            animation-timing-function: cubic-bezier(0, 0, 1, 1);
+        }
+
+        #guy2 {
+            animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        #guy3 {
+            animation-timing-function: cubic-bezier(0.42, 0, 1, 1);
+        }
+
+        #guy4 {
+            animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        #guy5 {
+            animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+        }
+
+        @keyframes mymove {
+            from {
+                left: 0px;
+            }
+
+            to {
+                left: 1600px;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+
+    <div class="germ">
+        <img id="guy1" class="badguy" src="" style="display:none">
+        <img id="guy2" class="badguy" src="" style="display:none">
+        <img id="guy3" class="badguy" src="" style="display:none">
+        <img id="guy4" class="badguy" src="" style="display:none">
+        <img id="guy5" class="badguy" src="" style="display:none">
+
+    </div>
+
+    <div class="timer">
+
+        <button id='start'
+            style=" cursor: grab; width: 100px; height:40px; background-color: green;  margin-top: 30px;font-size:70%"
+            type="button" onclick="counter()"><b>Start!</b></button><span><button id="off"
+                style="height:40px; cursor: grab; margin-left:15px;  width: 100px; background-color: red; display:none;font-size:70%"
+                type="button" onclick="stopCounter()"><b>Stop!</b></button></span>
+        <p id="secondsLeft" style="background-color:yellow; width: 60px; height: 50px;  text-align:center">:20</p>
+        <p id="timeOut"
+            style="background-color:red;  font-family: 'Barrio'; font-size: 22px; text-align: center; width: 250px;">
+        </p>
+        <br>
+
+        <p id="demo"
+            style="background-color:white;border-radius: 10px;box-shadow: 0 9px #999;cursor:grab; width:140px; font-size:70%"
+            onclick="shuffle()"><i class="fa fa-spinner fa-spin"></i>Shuffle!</p>
+        <br>
+        <div id="divout" class="w3-container" style="font-size: 22px; font-family: Barrio; text-align: center;">
+            <h1 id='demo1' class='w3-animate-fading'
+                style='background-color: yellow; font-family: "Barrio"; width: 250px;'></h1>
+            <p id='demo2' class='w3-animate-fading' style='background-color: yellow; width: 250px;'></p>
+        </div>
+        <!--div divout-->
+
+    </div>
+    <!--div timer-->
+
+
+
+    <a-scene embedded arjs='sourceType: webcam;'>
+        <!-- HIRO marker -->
+        <a-marker preset="hiro">
+            <a-entity id='hiro'></a-entity>
+        </a-marker>
+
+        <!-- KANJI marker -->
+        <a-marker preset="kanji">
+            <a-entity id='kanji'></a-entity>
+        </a-marker>
+
+        <!--A marker-->
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.a"
+            size="1">
+            <a-entity id='a'></a-entity>
+        </a-marker>
+
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.a"
+            size="1">
+            <a-image id='a' src="covid-19.jpg"></a-image>
+        </a-marker>
+
+
+
+        <!-- C marker -->
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.c"
+            size="1">
+            <a-entity id='c'></a-entity>
+        </a-marker>
+
+        <!-- D marker -->
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.d"
+            size="1">
+            <a-entity id='d'></a-entity>
+        </a-marker>
+
+        <!-- F marker -->
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.f"
+            size="1">
+            <a-entity id='f'></a-entity>
+        </a-marker>
+
+        <!-- G marker -->
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/multimarkers/multi-abcdef/patt.g"
+            size="1">
+            <a-entity id='g'></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+        <!--To fix entities onto the camera such that they stay within view no matter where the user looks, you can attach those entities as a child of the camera.-->
+    </a-scene>
+    <!--End of scene-->
+
+
+    <script>
+
+
+        let count = 20;
+
+        function counter() {
+            //document.getElementById("off").style.display = "";
+            document.getElementById("timeOut").innerHTML = " ";
+            myVar = setInterval(countDown, 1000);
+        }//counter()
+
+        function countDown() {
+
+            document.getElementById("off").style.display = "";
+            count = count - 1;
+
+            if (count > 9) {
+                document.getElementById("secondsLeft").innerHTML = ":" + count;
+            } else {
+                document.getElementById("secondsLeft").innerHTML = ":0" + count;
+            }//else
+
+            ///Show info capsules
+
+            if (count == 15) {
+                let n = Math.floor(Math.random() * 3);  // returns a random integer from 0 to 2
+
+                switch (n) {
+                    case 0://MILD SICKNESS
+
+
+                        document.getElementById("guy1").src = "images/coronavarius-rb.png";
+                        document.getElementById("guy2").src = "images/coronavarius-rb.png";
+                        document.getElementById("guy3").src = "images/coronavarius-rb.png";
+                        document.getElementById("guy4").src = "images/coronavarius-rb.png";
+                        document.getElementById("guy5").src = "images/coronavarius-rb.png";
+                        document.getElementById("guy1").removeAttribute("display");
+                        document.getElementById("guy1").style.display = "block";
+                        document.getElementById("guy2").removeAttribute("display");
+                        document.getElementById("guy2").style.display = "block";
+                        document.getElementById("guy3").removeAttribute("display");
+                        document.getElementById("guy3").style.display = "block";
+                        document.getElementById("guy4").removeAttribute("display");
+                        document.getElementById("guy4").style.display = "block";
+                        document.getElementById("guy5").removeAttribute("display");
+                        document.getElementById("guy5").style.display = "block";
+                        document.getElementById("demo1").innerHTML = "ARE YOU SICK?";
+                        document.getElementById("demo2").innerHTML = "STAY AT HOME!";
+                        break;
+                    case 1://Feeling Good
+
+
+                        document.getElementById("guy1").src = "images/healthy2-rb-2.png";
+                        document.getElementById("guy2").src = "images/healthy2-rb-2.png";
+                        document.getElementById("guy3").src = "images/healthy2-rb-2.png";
+                        document.getElementById("guy4").src = "images/healthy2-rb-2.png";
+                        document.getElementById("guy5").src = "images/healthy2-rb-2.png";
+                        document.getElementById("guy1").style.display = "block";
+                        document.getElementById("guy2").style.display = "block";
+                        document.getElementById("guy3").style.display = "block";
+                        document.getElementById("guy4").style.display = "block";
+                        document.getElementById("guy5").style.display = "block";
+                        document.getElementById("demo1").innerHTML = "FEELING GOOD!";
+                        document.getElementById("demo2").innerHTML = "STAY AT HOME AND WASH YOUR HANDS!";
+                        break;
+                    case 2://feeling very bad 
+
+
+
+                        document.getElementById("guy1").src = "images/verysick2-rb.png";
+                        document.getElementById("guy2").src = "images/verysick2-rb.png";
+                        document.getElementById("guy3").src = "images/verysick2-rb.png";
+                        document.getElementById("guy4").src = "images/verysick2-rb.png";
+                        document.getElementById("guy5").src = "images/verysick2-rb.png";
+                        document.getElementById("guy1").style.display = "block";
+                        document.getElementById("guy2").style.display = "block";
+                        document.getElementById("guy3").style.display = "block";
+                        document.getElementById("guy4").style.display = "block";
+                        document.getElementById("guy5").style.display = "block";
+                        document.getElementById("demo1").innerHTML = "YOU HAVE COVID_19?";
+                        document.getElementById("demo2").innerHTML = "STAY AT HOME AND WASH YOUR HANDS!";
+                        break;
+
+
+                }//switch
+
+            }//if count
+            //reset info
+            if (count == 6) {
+                document.getElementById("guy1").style.display = "none";
+                document.getElementById("guy2").style.display = "none";
+                document.getElementById("guy3").style.display = "none";
+                document.getElementById("guy4").style.display = "none";
+                document.getElementById("guy5").style.display = "none";
+                document.getElementById("demo1").innerHTML = "";
+                document.getElementById("demo2").innerHTML = "";
+            }
+
+            if (count < 0) {
+                count = 20;
+                clearInterval(myVar);
+                document.getElementById("timeOut").innerHTML = "<span><i style = 'padding:10px' class='far fa-frown' style='font-size:36px'></i></span>" + " Sorry...try again! ";
+                document.getElementById("secondsLeft").innerHTML = ":20";
+                document.getElementById("off").style.display = "none";
+            }//ends if
+
+        }//function count down ends
+
+        function stopCounter() {
+            clearInterval(myVar);
+            let timePassed = 20 - count;
+            if (timePassed > 4 & timePassed < 16) {
+                document.getElementById("guy1").style.display = "none";
+                document.getElementById("guy2").style.display = "none";
+                document.getElementById("guy3").style.display = "none";
+                document.getElementById("guy4").style.display = "none";
+                document.getElementById("guy5").style.display = "none";
+                // document.getElementById("demo1").innerHTML = "";
+                // document.getElementById("demo2").innerHTML = "";
+            } //if  
+            document.getElementById("timeOut").innerHTML = "<span><i style = 'padding:10px' class='far fa-grin-alt' style='font-size:36px'></i></span>" + " You found it " + timePassed + " seconds...! ";
+            document.getElementById("secondsLeft").innerHTML = ":20";
+            count = 20;
+
+            document.getElementById("off").style.display = "none";
+
+        }//stopCounter
+
+
+
+    </script>
+    <script>
+        //set attribute for hiro marker... BOX
+        let sceneEl = document.querySelector('a-scene');
+        let el1 = sceneEl.querySelector('#hiro');
+        el1.setAttribute('geometry', { primitive: 'box', height: '1' });
+        el1.setAttribute('material', { color: "red" });
+        el1.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+        //set attribute for kanji marker... CYLINDER
+        let el2 = sceneEl.querySelector('#kanji');
+        el2.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+        el2.setAttribute('material', { color: "cyan" });
+        el2.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+        //set attribute for A marker... CONE  
+        let el3 = sceneEl.querySelector('#a');
+        el3.setAttribute('geometry', { primitive: 'cone', height: '3' });
+        el3.setAttribute('material', { color: "red" });
+        el3.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+
+        //set attribute for C marker... RING 
+        let el4 = sceneEl.querySelector('#c');
+        el4.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+        el4.setAttribute('material', { color: "teal", side: 'double' });
+        el4.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+
+
+        //set attribute for D marker... TETRAHEDRON 
+        let el5 = sceneEl.querySelector('#d');
+        el5.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+        el5.setAttribute('material', { color: "#FF926B" });
+        el5.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+        //set attribute for F marker...PLANE 
+        let el6 = sceneEl.querySelector('#f');
+        el6.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+        el6.setAttribute('material', { color: "red" });
+        el6.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+
+        //set attribute for G marker... DODECAHEDRON 
+        let el7 = sceneEl.querySelector('#g');
+        el7.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+        el7.setAttribute('material', { color: "#FF926B" });
+        el7.setAttribute('position', { x: 0, y: 0.5, z: 0 });
+
+
+
+
+
+
+
+        function shuffle() {
+            let indexNum = Math.floor(Math.random() * 7);  // returns a random integer from 0 to 6
+            switch (indexNum) {
+                case 0:
+                    el1.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el1.setAttribute('material', { color: "cyan" });
+                    el2.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el2.setAttribute('material', { color: "red" });
+                    el3.setAttribute('geometry', { primitive: { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 } });
+                    el3.setAttribute('material', { color: "teal" });
+                    el4.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el4.setAttribute('material', { color: "#FF926B" });
+                    el5.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el5.setAttribute('material', { color: "red" });
+                    el6.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el6.setAttribute('material', { color: "#FF926B" });
+                    el7.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el7.setAttribute('material', { color: "red" });
+                    alert("Shufle case o done!");
+                    break;
+
+                case 1:
+                    el1.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el1.setAttribute('material', { color: "#FF926B" });
+                    el2.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el2.setAttribute('material', { color: "#FF926B" });
+                    el3.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+                    el3.setAttribute('material', { color: "teal", side: 'double' });
+                    el4.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el4.setAttribute('material', { color: "red" });
+                    el5.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el5.setAttribute('material', { color: "red" });
+                    el6.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el6.setAttribute('material', { color: "cyan" });
+                    el7.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el7.setAttribute('material', { color: "red" });
+                    alert("Shufle case 1 done!");
+                    break;
+
+                case 2:
+                    el1.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el1.setAttribute('material', { color: "red" });
+                    el2.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el2.setAttribute('material', { color: "red" });
+                    el3.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el3.setAttribute('material', { color: "cyan" });
+                    el4.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el4.setAttribute('material', { color: "red" });
+                    el5.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el5.setAttribute('material', { color: "#FF926B" });
+                    el6.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el6.setAttribute('material', { color: "#FF926B" });
+                    el7.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+                    el7.setAttribute('material', { color: "teal", side: 'double' });
+                    alert("Shufle case 2 done!");
+                    break;
+
+                case 3:
+                    el1.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+                    el1.setAttribute('material', { color: "teal", side: 'double' });
+                    el2.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el2.setAttribute('material', { color: "red" });
+                    el3.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el3.setAttribute('material', { color: "red" });
+                    el4.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el4.setAttribute('material', { color: "#FF926B" });
+                    el5.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el5.setAttribute('material', { color: "red" });
+                    el6.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el6.setAttribute('material', { color: "cyan" });
+                    el7.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el7.setAttribute('material', { color: "#FF926B" });
+                    alert("Shufle case 3 done!");
+                    break;
+
+                case 4:
+                    el1.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el1.setAttribute('material', { color: "#FF926B" });
+                    el2.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el2.setAttribute('material', { color: "red" });
+                    el3.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el3.setAttribute('material', { color: "#FF926B" });
+                    el4.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el4.setAttribute('material', { color: "red" });
+                    el5.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el5.setAttribute('material', { color: "cyan" });
+                    el6.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el6.setAttribute('material', { color: "red" });
+                    el7.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+                    el7.setAttribute('material', { color: "teal", side: 'double' });
+                    alert("Shufle case 4 done!");
+                    break;
+
+                case 5:
+                    el1.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el1.setAttribute('material', { color: "red" });
+                    el2.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+                    el2.setAttribute('material', { color: "teal", side: 'double' });
+                    el3.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el3.setAttribute('material', { color: "cyan" });
+                    el4.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el4.setAttribute('material', { color: "#FF926B" });
+                    el5.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el5.setAttribute('material', { color: "#FF926B" });
+                    el6.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el6.setAttribute('material', { color: "red" });
+                    el7.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el7.setAttribute('material', { color: "red" });
+                    alert("Shufle case 5 done!");
+                    break;
+
+                case 6:
+                    el1.setAttribute('geometry', { primitive: 'box', height: '2' });
+                    el1.setAttribute('material', { color: "red" });
+                    el2.setAttribute('geometry', { primitive: 'plane', height: '3', width: '3' });
+                    el2.setAttribute('material', { color: "red" });
+                    el3.setAttribute('geometry', { primitive: 'tetrahedron', radius: '2' });
+                    el3.setAttribute('material', { color: "#FF926B" });
+                    el4.setAttribute('geometry', { primitive: 'cone', height: '3' });
+                    el4.setAttribute('material', { color: "red" });
+                    el5.setAttribute('geometry', { primitive: 'dodecahedron', radius: '2' });
+                    el5.setAttribute('material', { color: "#FF926B" });
+                    el6.setAttribute('geometry', { primitive: 'ring', radiusInner: 0.5, radiusOuter: 1 });
+                    el6.setAttribute('material', { color: "teal", side: 'double' });
+                    el7.setAttribute('geometry', { primitive: 'cylinder', height: '2' });
+                    el7.setAttribute('material', { color: "cyan" });
+                    alert("Shufle case 6 done!");
+                    break;
+            }//switch
+        }//shuffle
+
+    </script>
+
+
+</body>
+
+</html>

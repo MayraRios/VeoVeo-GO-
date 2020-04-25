@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A & C marker</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div {
+        margin: 250px;
+    }
+</style>
+
+<body>
+    <button onclick="goBack()" class="w3-btn w3-red">
+        <font size="4">GO BACK</font>
+    </button>
+    <h1>Print, fold paper in half and cut. Now you have 2 markers.</h1>
+    <button onclick="window.print()">Print this page</button>
+    <div>
+        <img src="images/letterA.png" alt="Hero" style="width:50%;">
+    </div>
+    <div>
+        <img src="images/letterc.png" alt="Kanji" style="width:50%;">
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

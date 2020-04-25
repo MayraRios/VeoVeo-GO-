@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>marker Hero& Kanji</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero & Kanji</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div {
+        margin: 20px;
+    }
+</style>
+
+<body>
+    <button onclick="goBack()" class="w3-btn w3-red">
+        <font size="4">GO BACK</font>
+    </button>
+
+
+    <h1>Print, fold paper in half and cut. Now you have 2 markers.</h1>
+    <button onclick="window.print()">Print this page</button>
+
+    <div>
+        <img src="images/marker2-1.jpg" alt="Hero" style="width:50%;">
+    </div>
+    <div>
+        <img src="images/marker1-1.jpg" alt="Kanji" style="width:50%;">
+    </div>
+
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
